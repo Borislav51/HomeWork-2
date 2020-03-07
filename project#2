@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define N 10
+#define M 10
+
+int main()
+{
+	int A[N][M];
+	int z;
+	int x;
+	int y;
+	printf("Savin Borislav, group 1142\n");
+	printf("\n");
+	printf("HomeWork 2\n");
+	printf("\n");
+	printf("Random massiv:\n");
+	function_1(A);
+	function_2(A);
+	printf("\n");
+	printf("Figure fill:");
+	scanf("%d", &z);
+	printf("Line number:");
+	scanf("%d", &x);
+	printf("Column number:");
+	scanf("%d", &y);
+	printf("\n");
+	printf("Ready massiv:\n");
+	function_3(A, z, x, y);
+	function_2(A);
+	return 0;
+}
+
+void function_1(int A[N][M])
+{
+	for (int x = 0; x < N; ++x) 
+	{
+		for (int y = 0; y < M; ++y)
+		{
+			if (x == 0 || y == 0 || x % (N - 1) == 0 || y % (M - 1) == 0)
+			{
+				A[x][y] = 1;
+			}
+			else
+			{
+				A[x][y] = rand() % 2 ? rand() % 2 : 0;
+			}
+		}
+	}	
+}
+
+void function_2(int A[N][M])
+{
+	for (int x = 0; x < N; ++x)
+	{
+		for (int y = 0; y < M; ++y)
+		{
+			printf("%d", A[x][y]);
+		}
+		printf("\n");
+	}
+}
+
+void function_3(int A[N][M], int z, int x, int y)
+{
+	if (x < N && y < M)
+	{
+		if (A[x][y] == 0)
+		{
+			A[x][y] = z;
+			function_3(A, z, x, y + 1);
+			function_3(A, z, x, y - 1);
+			function_3(A, z, x - 1, y);
+			function_3(A, z, x + 1, y);
+		}
+		else if (A[x][y] == 1)
+		{
+			return;
+		}
+	}
+}
